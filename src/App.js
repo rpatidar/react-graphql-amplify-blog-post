@@ -189,7 +189,7 @@ class AlbumDetailsLoader extends React.Component {
       imageW: 24,
       imageX: 0,
       imageY: 0,
-      imageSrc: 'http://www.pngimagesfree.com/Design/Welcome/welcome-namaste-hand-png.png',
+      imageSrc: 'https://tinyurl.com/p5f9xvu2',
       imageExcavate: true,
       centerImage: true
     }
