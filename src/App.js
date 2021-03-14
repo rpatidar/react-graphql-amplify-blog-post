@@ -53,7 +53,7 @@ const GetAlbum = `query GetAlbum($id: ID!, $nextTokenForPhotos: String) {
     photos(sortDirection: DESC, nextToken: $nextTokenForPhotos) {
       nextToken
       items {
-        {
+        fullsize {
           width
           height
           key
