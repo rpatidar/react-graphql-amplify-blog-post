@@ -8,6 +8,8 @@ import { Divider, Form, Grid, Header, Icon, Input, List, Segment } from 'semanti
 import {BrowserRouter as Router, Route, NavLink} from 'react-router-dom';
 import {v4 as uuid} from 'uuid';
 
+var QRCode = require('qrcode.react');
+
 Amplify.configure(aws_exports);
 
 
@@ -173,7 +175,23 @@ class AlbumDetailsLoader extends React.Component {
       nextTokenForPhotos: null,
       hasMorePhotos: true,
       album: null,
-      loading: true
+      loading: true,
+
+      value: window.location.href,
+      size: 128,
+      fgColor: '#000000',
+      bgColor: '#ffffff',
+      level: 'L',
+      renderAs: 'svg',
+      includeMargin: false,
+      includeImage: true,
+      imageH: 24,
+      imageW: 24,
+      imageX: 0,
+      imageY: 0,
+      imageSrc: 'http://www.pngimagesfree.com/Design/Welcome/welcome-namaste-hand-png.png',
+      imageExcavate: true,
+      centerImage: true
     }
   }
 
@@ -204,7 +222,30 @@ class AlbumDetailsLoader extends React.Component {
   }
 
   render() {
-    return <AlbumDetails loadingPhotos={this.state.loading} album={this.state.album} loadMorePhotos={this.loadMorePhotos.bind(this)} hasMorePhotos={this.state.hasMorePhotos}/>;
+    return <div > 
+        <QRCode
+          value={this.state.value}
+          size={this.state.size}
+          fgColor={this.state.fgColor}
+          bgColor={this.state.bgColor}
+          level={this.state.level}
+          renderAs={this.state.renderAs}
+          includeMargin={this.state.includeMargin}
+          imageSettings={
+            this.state.includeImage
+              ? {
+                  src: this.state.imageSrc,
+                  height: this.state.imageH,
+                  width: this.state.imageW,
+                  x: this.state.centerImage ? null : this.state.imageX,
+                  y: this.state.centerImage ? null : this.state.imageY,
+                  excavate: this.state.imageExcavate,
+                }
+              : null
+          } />
+        <AlbumDetails loadingPhotos={this.state.loading} album={this.state.album} loadMorePhotos={this.loadMorePhotos.bind(this)} hasMorePhotos={this.state.hasMorePhotos}/>;
+
+      </div>
   }
 }
 
@@ -216,14 +257,14 @@ class AlbumDetails extends Component {
       <Segment>
         <Header as='h3'>{this.props.album.name}</Header>
 
-        <Segment.Group>
+        {/* <Segment.Group>
           <Segment>
             <AlbumMembers members={this.props.album.members} />
           </Segment>
           <Segment basic>
             <AddUsernameToAlbum albumId={this.props.album.id} />
           </Segment>
-        </Segment.Group>
+        </Segment.Group> */}
 
         <S3ImageUpload albumId={this.props.album.id}/>        
         <PhotosList photos={this.props.album.photos.items} />
