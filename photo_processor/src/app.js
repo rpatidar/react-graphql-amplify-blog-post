@@ -5,7 +5,7 @@ const uuidv4 = require('uuid/v4');
 
 // Note: Sharp requires native extensions. To get sharp to install from NPM in a
 // way that's compatible with the Amazon Linux environmet that AWS runs Node.js
-// on, we can use this command: docker run -v "$PWD":/var/task lambci/lambda:build-nodejs8.10 npm install
+// on, we can use this command: docker run -v "$PWD":/var/task lambci/lambda:build-nodejs10.x npm install
 const Sharp = require('sharp');
 
 // We'll expect these environment variables to be defined when the Lambda function is deployed

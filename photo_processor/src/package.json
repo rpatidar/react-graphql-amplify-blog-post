@@ -4,7 +4,8 @@
   "description": "Our Photo Album uploads processor",
   "main": "src/app.js",
   "dependencies": {
-    "sharp": "^0.20.2",
+    "install": "^0.13.0",
+    "sharp": "^0.27.2",
     "uuid": "^3.3.2"
   }
 }

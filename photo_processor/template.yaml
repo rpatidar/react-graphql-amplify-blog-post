@@ -54,7 +54,7 @@ Resources:
             CodeUri: src/
             Handler: app.lambda_handler
             Role: !GetAtt PhotoProcessorFunctionIamRole.Arn
-            Runtime: nodejs8.10
+            Runtime: nodejs10.x 
             Environment:
                 Variables:
                     THUMBNAIL_WIDTH: 80

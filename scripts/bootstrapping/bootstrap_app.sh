@@ -13,7 +13,7 @@ popd
 
 # Install npm deps for photo_processor lambda
 pushd ../../photo_processor/src
-docker run -v "$PWD":/var/task lambci/lambda:build-nodejs8.10 npm install
+docker run -v "$PWD":/var/task lambci/lambda:build-nodejs10.x npm install
 popd
 
 # Get deployment bucket as a destination we can use for CloudFormation templates
@@ -40,7 +40,7 @@ sam deploy \
 --template-file packaged.yml \
 --stack-name $STACK_NAME \
 --capabilities CAPABILITY_IAM \
---region us-east-1 \
+--region ap-south-1 \
 --parameter-overrides \
 S3UserfilesBucketArn=arn:aws:s3:::$STORAGE_BUCKET_NAME \
 DynamoDBPhotosTableArn=$PHOTOS_TABLE_ARN || true
@@ -53,7 +53,7 @@ node --experimental-modules configureS3LambdaTrigger.mjs $STACK_NAME
 node --experimental-modules addExplicitListBucketDenyToAuthRole.mjs
 
 # Update the PhotoTable GSI
-node --experimental-modules updatePhotoTableGsi.mjs
+#node --experimental-modules updatePhotoTableGsi.mjs
 
 # Update AppSync
 node --experimental-modules updateAppSync.mjs

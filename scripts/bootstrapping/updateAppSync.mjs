@@ -241,12 +241,14 @@ async function updateMutations() {
 
 async function main() {
     console.log('Updating AppSync...');
-    await addMembersToAlbumType();
+    //await addMembersToAlbumType();
     await updateMutations();
-    await createAlbum_resolver();
-    await getAlbum_resolver();
-    addUsernameToAlbum_resolver();
+    //await createAlbum_resolver();
+    //await getAlbum_resolver();
+    //addUsernameToAlbum_resolver();
     console.log('Done.');
 }
 
-main();
+main().catch(function(error){
+	console.log(error)
+});

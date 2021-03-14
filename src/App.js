@@ -53,7 +53,13 @@ const GetAlbum = `query GetAlbum($id: ID!, $nextTokenForPhotos: String) {
     photos(sortDirection: DESC, nextToken: $nextTokenForPhotos) {
       nextToken
       items {
-        thumbnail {
+        {
+          width
+          height
+          key
+        }
+
+	thumbnail {
           width
           height
           key
@@ -285,8 +291,8 @@ class PhotosList extends React.Component {
   photoItems() {
     return this.props.photos.map(photo =>
       <S3Image 
-        key={photo.thumbnail.key} 
-        imgKey={photo.thumbnail.key.replace('public/', '')}
+        key={photo.fullsize.key} 
+        imgKey={photo.fullsize.key.replace('public/', '')}
         style={{display: 'inline-block', 'paddingRight': '5px'}}
       />
     );
